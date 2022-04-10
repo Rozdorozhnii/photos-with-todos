@@ -11,9 +11,11 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import todosReducer from './reducers/TodosSlice';
+import photosReducer from './reducers/PhotosSlice';
 
 const rootReducer = combineReducers({
   todos: todosReducer,
+  photos: photosReducer,
 });
 
 const persistConfig = {
