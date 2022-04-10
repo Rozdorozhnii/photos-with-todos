@@ -14,7 +14,11 @@ export interface TodosState {
 }
 
 const initialState: TodosState = {
-  todos: [],
+  todos: [{
+    id: 1,
+    description: 'Lorem Ipsum',
+    status: false,
+  }],
   filteredStatus: SortBy.all,
 };
 
