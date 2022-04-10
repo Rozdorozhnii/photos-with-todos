@@ -1,27 +1,28 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { MainNavigation } from './components/MainNavigation';
+import { RootPage } from './components/RootPage';
+import { PhotosPage } from './components/PhotosPage';
+import { TodosPage } from './components/TodosPage';
+import { Todo } from './components/Todo';
+import { PageNotFound } from './components/PageNotFound';
+
 import './App.scss';
-
-interface Props {
-  onClick: () => void;
-}
-
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
 
 export const App: React.FC = () => {
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
-    </div>
+    <>
+      <MainNavigation />
+
+      <section>
+        <Routes>
+          <Route path="/" element={<RootPage />} />
+          <Route path="photos" element={<PhotosPage />} />
+          <Route path="todos" element={<TodosPage />} />
+          <Route path="todos/:todoid" element={<Todo />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </section>
+    </>
   );
 };
