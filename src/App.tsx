@@ -14,7 +14,7 @@ export const App: React.FC = () => {
     <>
       <MainNavigation />
 
-      <section>
+      <section className="main">
         <Routes>
           <Route path="/" element={<RootPage />} />
           <Route path="photos" element={<PhotosPage />} />

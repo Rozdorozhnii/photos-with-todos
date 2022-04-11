@@ -42,6 +42,7 @@ export const TodosPage: React.FC = () => {
 
   return (
     <div>
+      <h2>Page with Todos</h2>
       <label htmlFor="select-completed">
         Toggle completion status&nbsp;
         <select
@@ -51,8 +52,8 @@ export const TodosPage: React.FC = () => {
           onChange={(event) => dispatch(setStatusFilter(event.target.value))}
         >
           <option value={SortBy.all}>All</option>
-          <option value={SortBy.completed}>Completed</option>
-          <option value={SortBy.active}>Active</option>
+          <option value={SortBy.done}>Done</option>
+          <option value={SortBy.todo}>Todo</option>
         </select>
       </label>
       <form

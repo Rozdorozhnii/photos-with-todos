@@ -4,8 +4,8 @@ import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 // eslint-disable-next-line no-shadow
 export enum SortBy {
   all = 'all',
-  completed = 'true',
-  active = 'false'
+  done = 'true',
+  todo = 'false'
 }
 
 export interface TodosState {

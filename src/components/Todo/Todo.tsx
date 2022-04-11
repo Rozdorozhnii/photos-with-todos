@@ -9,10 +9,12 @@ export const Todo: React.FC = () => {
   const goalTodo = todos.find(todo => todo.id === Number(params.todoid));
 
   return (
-    <div className="single todo">
-      {`Single Todo with id #${params.todoid}`}
+    <div className="single-todo">
+      <h2>Single Todo Page</h2>
+      {`with id #${params.todoid}`}
       <br />
-      {`Description of todo ${goalTodo?.description}`}
+      <strong>Description of todo: </strong>
+      {goalTodo?.description}
     </div>
   );
 };

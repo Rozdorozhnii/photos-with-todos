@@ -29,27 +29,29 @@ export const PhotosPage: React.FC = () => {
 
   return (
     <div className="photo">
-      <h2>Page with photos</h2>
-      <label htmlFor="number-input">
-        <span>
-          Choose id of album here
-        </span>
-        <input
-          value={selectedValue?.toString()}
-          type="number"
-          step="1"
-          min="1"
-          max="100"
-          onChange={(e) => setSelectedValue(Number(e.target.value))}
-        />
-      </label>
-      <button
-        type="button"
-        onClick={() => dispatch(fetchPhotos(Number(selectedValue)))}
-        disabled={selectedValue === fetchingAlbumId}
-      >
-        Get photos
-      </button>
+      <div className="photo__top">
+        <h2>Page with Photos</h2>
+        <label htmlFor="number-input">
+          <span>
+            Choose id of album here
+          </span>
+          <input
+            value={selectedValue?.toString()}
+            type="number"
+            step="1"
+            min="1"
+            max="100"
+            onChange={(e) => setSelectedValue(Number(e.target.value))}
+          />
+        </label>
+        <button
+          type="button"
+          onClick={() => dispatch(fetchPhotos(Number(selectedValue)))}
+          disabled={selectedValue === fetchingAlbumId}
+        >
+          Get photos
+        </button>
+      </div>
       <div className="photo__container">
         {photos.map(photo => (
           <div className="photo__card" key={photo.id}>

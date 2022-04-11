@@ -1,32 +1,29 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Container from 'react-bootstrap/esm/Container';
+import Nav from 'react-bootstrap/esm/Nav';
+import Navbar from 'react-bootstrap/esm/Navbar';
+import { Link } from 'react-router-dom';
 import './MainNavigation.scss';
 
 export const MainNavigation: React.FC = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <NavLink
-          to="/"
-          // activeClassName="is-active"
+    <Navbar bg="primary" variant="dark">
+      <Container>
+        <Navbar.Brand
+          href="/"
         >
           Home
-        </NavLink>
+        </Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link as={Link} to="/photos">
+            Photos
+          </Nav.Link>
 
-        <NavLink
-          to="/photos"
-          // activeClassName="is-active"
-        >
-          Photos
-        </NavLink>
-
-        <NavLink
-          to="/todos"
-          // activeClassName="is-active"
-        >
-          Todos
-        </NavLink>
-      </div>
-    </nav>
+          <Nav.Link as={Link} to="/todos">
+            Todos
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 };
