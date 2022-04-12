@@ -10,7 +10,8 @@ export const MainNavigation: React.FC = () => {
     <Navbar bg="primary" variant="dark">
       <Container>
         <Navbar.Brand
-          href="/"
+          as={Link}
+          to="/"
         >
           Home
         </Navbar.Brand>
