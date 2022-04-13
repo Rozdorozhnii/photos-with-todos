@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { todosSlice, SortBy } from '../../store/reducers/TodosSlice';
@@ -41,61 +43,69 @@ export const TodosPage: React.FC = () => {
   }
 
   return (
-    <div>
-      <h2>Page with Todos</h2>
-      <label htmlFor="select-completed">
-        Toggle completion status&nbsp;
-        <select
-          className="TodoList__interactive-input"
-          id="select-completed"
-          value={filteredStatus}
-          onChange={(event) => dispatch(setStatusFilter(event.target.value))}
+    <div className="todoPage">
+      <div className="todoPage__top">
+        <h2>Page with Todos</h2>
+        <Form.Label htmlFor="select-completed" style={{ width: '350px', marginBottom: '16px' }}>
+          Toggle completion status below
+          <Form.Select
+            style={{ marginTop: '8px' }}
+            id="select-completed"
+            value={filteredStatus}
+            onChange={(event) => dispatch(setStatusFilter(event.target.value))}
+          >
+            <option value={SortBy.all}>All</option>
+            <option value={SortBy.done}>Done</option>
+            <option value={SortBy.todo}>Todo</option>
+          </Form.Select>
+        </Form.Label>
+        <Form
+          style={{ width: '350px' }}
+          onSubmit={onSubmitNewTodo}
+          method="post"
         >
-          <option value={SortBy.all}>All</option>
-          <option value={SortBy.done}>Done</option>
-          <option value={SortBy.todo}>Todo</option>
-        </select>
-      </label>
-      <form
-        onSubmit={onSubmitNewTodo}
-        method="post"
-      >
-        <input
-          value={newTodoValue}
-          onChange={(e) => setNewTodoValue(e.target.value)}
-        />
-        <button
-          type="submit"
-        >
-          Add todo
-        </button>
-      </form>
-      <ul>
-        {visibleTodos.map(todo => (
-          <li key={todo.id}>
-            <label htmlFor="checkbox">
-              <input
-                id="checkbox"
-                checked={todo.status}
-                type="checkbox"
-                onChange={() => dispatch(toggleStatusTodo(todo.id))}
-              />
-              <Link
-                className={cn({ 'Todo--checked': todo.status })}
-                to={`/todos/${todo.id}`}
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="new-todo-input">Add new todo below</Form.Label>
+            <Form.Control
+              id="new-todo-input"
+              placeholder="Enter here"
+              value={newTodoValue}
+              onChange={(e) => setNewTodoValue(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="secondary" type="submit">
+            Add todo
+          </Button>
+        </Form>
+      </div>
+      <div className="todoPage__content">
+        <ul className="todoPage__list">
+          {visibleTodos.map(todo => (
+            <li key={todo.id} className="todoPage__list-item">
+              <div>
+                <input
+                  checked={todo.status}
+                  type="checkbox"
+                  onChange={() => dispatch(toggleStatusTodo(todo.id))}
+                />
+                <Link
+                  className={cn('todoPage__link', { 'todoPage__link--checked': todo.status })}
+                  to={`/todos/${todo.id}`}
+                >
+                  {todo.description}
+                </Link>
+              </div>
+              <Button
+                variant="danger"
+                onClick={() => dispatch(removeTodo(todo.id))}
+                type="button"
               >
-                {`${todo.description} ${todo.id}`}
-              </Link>
-            </label>
-            <button
-              onClick={() => dispatch(removeTodo(todo.id))}
-              type="button"
-            >
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+                Remove
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

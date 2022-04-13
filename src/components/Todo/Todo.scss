@@ -1,0 +1,10 @@
+.single-todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  & > strong {
+    margin-top: 20px;
+  }
+}
